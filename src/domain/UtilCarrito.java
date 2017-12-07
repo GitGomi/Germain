@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class UtilCarrito {
     private static Map<Integer,String> catalogoProductos = new HashMap<>();
-    private static Map<Integer,String> catalogoCodigos = new HashMap<>();
+    public static Map<Integer,String> catalogoCodigos = new HashMap<>();
     private static Map<Integer,Double> catalogoPrecios = new HashMap<>();
     private static Map<Integer,Integer> catalogoDescuentos = new HashMap<>();
     

@@ -5,7 +5,6 @@
  */
 package domain;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -27,7 +26,7 @@ public class test {
         System.out.println("Cuando termines de comprar escribe la palabra \"listo\" ");
         System.out.println("Ingresa los productos a comprar...");
         
-        String saltar = "";
+        String saltar = null;
         while (true) {
             saltar = leer.nextLine();
             
@@ -41,8 +40,8 @@ public class test {
         }
         //carrito.listaArticulos();
         if(carrito.getArticulos().size() > 0){
-            System.out.println("\nGenerando Ticket....");
             Ticket ticket = new Ticket(carrito);
+            System.out.println("\nGenerando Ticket # " + ticket.getIdTicket());
             ticket.generaTicket();
         }else {
             System.err.println("Muchas gracias, esperamos vuelvas pronto");

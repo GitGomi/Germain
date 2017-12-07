@@ -9,18 +9,23 @@ package domain;
  *
  * @author 171204 Grupo Salinas
  */
-public class Persona {
-    private int numero;
+public abstract class Persona {
+    private String nombre;
     private String domicilio;
-    private String telefono;
-    private String rfc;
+    private int edad;
 
-    public int getNumero() {
-        return numero;
+    protected Persona(String nombre, String domicilio, int edad) {
+        this.nombre = nombre;
+        this.domicilio = domicilio;
+        this.edad = edad;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getDomicilio() {
@@ -31,20 +36,17 @@ public class Persona {
         this.domicilio = domicilio;
     }
 
-    public String getTelefono() {
-        return telefono;
+    public int getEdad() {
+        return edad;
     }
 
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
+    public void setEdad(int edad) {
+        this.edad = edad;
     }
 
-    public String getRfc() {
-        return rfc;
+    @Override
+    public String toString() {
+        return "nombre=" + nombre + ", domicilio=" + domicilio + ", edad=" + edad;
     }
 
-    public void setRfc(String rfc) {
-        this.rfc = rfc;
-    }
-    
 }

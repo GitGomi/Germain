@@ -7,32 +7,37 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import servicios.OperaArticulos;
 
 /**
  *
  * @author 171204 Grupo Salinas
  */
-public class Carrito {
+public class Carrito implements OperaArticulos{
     private List<Articulo> articulos;
     
     public Carrito() {
         articulos = new ArrayList<>();
     }
     
-    public void agregarArticulo(Articulo articulo){
+    @Override
+    public void agregarArticulo(Articulo articulo) {
         articulos.add(articulo);
     }
     
+    @Override
     public void listaArticulos() {
         for (Articulo articulo : articulos) {
-            System.out.println("Articulo -> " + articulo);
+            System.out.println(articulo);
         }
     }
     
-    public void borraArticulo(Articulo articulo){
+    @Override
+    public void borraArticulo(Articulo articulo) {
         articulos.remove(articulo);
     }
     
+    @Override
     public Articulo buscarArticulo(String codigo){
         Articulo articuloTemp = new Articulo();
         for (Articulo articulo : articulos) {

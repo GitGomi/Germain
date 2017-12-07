@@ -6,36 +6,34 @@
 package domain;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author 171204 Grupo Salinas
  */
 public class Ticket {
-    
-    private Tienda tienda;
+    private int idTicket;
     private Carrito carrito;
     private double subTotal;
     private double descuento;
     private double iva;
     private double total;
     private static int IVA = 16;
+    private static int nextID = 0;
 
     public Ticket() {}
     
     public Ticket(Carrito carrito) {
+        this.idTicket = nextID++;
         this.descuento = 0.0;
         this.total = 0.0;
         this.iva = 0.0;
         this.carrito = carrito;
     }
 
-    public Tienda getTienda() {
-        return tienda;
-    }
-
-    public void setTienda(Tienda tienda) {
-        this.tienda = tienda;
+    public int getIdTicket() {
+        return idTicket;
     }
 
     public double getSubTotal() {
@@ -79,8 +77,11 @@ public class Ticket {
     }
 
     public void generaTicket() {
-        calculaCantidades();
         List<Articulo> articulos = this.carrito.getArticulos();
+        calculaCantidades(articulos);
+        
+        carrito.listaArticulos();
+        
         String articulosVendidos = "# ARTS. VENDIDOS " + articulos.size();
         System.err.println("Articulo" + "\t" + "Código" + "\t\t" + "P/Unitario" + "\t" + "D/Unitario");
         for (Articulo articulo : articulos) {
@@ -109,8 +110,25 @@ public class Ticket {
         this.total = this.subTotal + obtenerIva();
     }
     
-    private void calculaCantidades(){
-        List<Articulo> articulos = this.carrito.getArticulos();
-        carrito.listaArticulos();
+    private void calculaCantidades(List<Articulo> articulos){
+        int cantidad = 0;
+        for (Map.Entry<Integer, String> entry : UtilCarrito.catalogoCodigos.entrySet()) {
+            for (Articulo articulo : articulos) {
+                if(entry.getValue().equals(articulo.getCodigo())){
+                    cantidad++;
+                }
+            }
+            actualizaCantidad(entry.getValue(), cantidad, articulos);
+            cantidad = 0;
+        }
+
+    }
+    
+    private void actualizaCantidad(String codigo, int cantidad, List<Articulo> articulos) {
+        for (Articulo articulo : articulos) {
+            if(articulo.getCodigo().equals(codigo)){
+                articulo.setCantidad(cantidad);
+            }
+        }
     }
 }

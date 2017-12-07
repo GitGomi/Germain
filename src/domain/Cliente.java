@@ -9,37 +9,21 @@ package domain;
  *
  * @author 171204 Grupo Salinas
  */
-public class Cliente {
+public class Cliente extends Persona{
     private int idCliente;
-    private String nombre;
-    private String domicilio;
     private String rfc;
-    private Carrito carrito; 
+    private String email;
+    private static int nextID = 0;
 
+    public Cliente(String nombre, String domicilio, int edad, String rfc, String email) {
+        super(nombre, domicilio, edad);
+        this.idCliente = nextID++;
+        this.rfc = rfc;
+        this.email = email;
+    }
+    
     public int getIdCliente() {
         return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
-    }
-
-    
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getDomicilio() {
-        return domicilio;
-    }
-
-    public void setDomicilio(String domicilio) {
-        this.domicilio = domicilio;
     }
 
     public String getRfc() {
@@ -50,17 +34,17 @@ public class Cliente {
         this.rfc = rfc;
     }
 
-    public Carrito getCarrito() {
-        return carrito;
+    public String getEmail() {
+        return email;
     }
 
-    public void setCarrito(Carrito carrito) {
-        this.carrito = carrito;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", domicilio=" + domicilio + ", rfc=" + rfc + ", carrito=" + carrito + '}';
+        return "Cliente{" + super.toString() + "idCliente=" + idCliente + ", rfc=" + rfc + ", email=" + email + '}';
     }
 
 }

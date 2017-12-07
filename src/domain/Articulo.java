@@ -79,7 +79,7 @@ public class Articulo {
 
     @Override
     public String toString() {
-        return "Articulo{" + "codigo=" + codigo + ", descripcion=" + descripcion + ", precio=" + String.format("$%,.2f %n", precio) + ", descuento=" + descuento + '}';
+        return "Articulo{" + "cantidad=" + cantidad + ", codigo=" + codigo + ", descripcion=" + descripcion + ", precio=" + String.format("$%,.2f %n", precio) + ", descuento=" + descuento + '}';
     }
 
 }

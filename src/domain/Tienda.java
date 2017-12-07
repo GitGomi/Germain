@@ -5,13 +5,15 @@
  */
 package domain;
 
+import java.util.ArrayList;
 import java.util.List;
+import servicios.ManejaClientes;
 
 /**
  *
  * @author 171204 Grupo Salinas
  */
-public class Tienda {
+public class Tienda implements ManejaClientes {
     private int numeroTienda;
     private String domicilio;
     private String telefono;
@@ -20,6 +22,10 @@ public class Tienda {
     private List<Ticket> tickets;
     private List<Factura> facturas;
 
+    public Tienda() {
+        clientes = new ArrayList<>();
+    }
+    
     public int getNumeroTienda() {
         return numeroTienda;
     }
@@ -79,6 +85,53 @@ public class Tienda {
     @Override
     public String toString() {
         return "Tienda{" + "numeroTienda=" + numeroTienda + ", domicilio=" + domicilio + ", telefono=" + telefono + ", rfc=" + rfc + ", clientes=" + clientes + ", tickets=" + tickets + ", facturas=" + facturas + '}';
+    }
+
+    @Override
+    public void altaCliente(Cliente cliente) {
+        clientes.add(cliente);
+    }
+
+    @Override
+    public void bajaCliente(int idCliente) {
+        for (Cliente cliente : clientes) {
+            if(cliente.getIdCliente() == idCliente) {
+                clientes.remove(cliente);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void actualizaCliente(Cliente cliente) {
+        for (Cliente clienteTemp : clientes) {
+            if(clienteTemp.getIdCliente() == cliente.getIdCliente()) {
+                clienteTemp.setNombre(cliente.getNombre());
+                clienteTemp.setEdad(cliente.getEdad());
+                clienteTemp.setEmail(cliente.getEmail());
+                clienteTemp.setDomicilio(cliente.getDomicilio());
+                clienteTemp.setRfc(cliente.getRfc());
+                break;
+            }
+        }
+    }
+
+    @Override
+    public Cliente buscaCliente(int idCliente) {
+        Cliente clienteTemp = null;
+        for (Cliente cliente : clientes) {
+            if(cliente.getIdCliente() == idCliente){
+                clienteTemp = cliente;
+            }
+        }
+        return clienteTemp;
+    }
+
+    @Override
+    public void imprimeClientes() {
+        for (Cliente cliente : clientes) {
+            System.out.println(cliente);
+        }
     }
     
 }

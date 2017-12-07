@@ -19,32 +19,7 @@ public class test {
     
     public static void main(String... args) {
         Carrito carrito = new Carrito();
-        /*
-        String descripcion = "cinturon";
-        crearArticulo(descripcion);
-        carrito.agregarArticulo(articulo);
         
-        descripcion = "chamarra";
-        crearArticulo(descripcion);
-        carrito.agregarArticulo(articulo);
-        
-        descripcion = "anteojos";
-        crearArticulo(descripcion);
-        carrito.agregarArticulo(articulo);
-        
-        descripcion = "zapatos";
-        crearArticulo(descripcion);
-        carrito.agregarArticulo(articulo);
-        
-        descripcion = "chamarra";
-        crearArticulo(descripcion);
-        carrito.agregarArticulo(articulo);
-        
-        carrito.listaArticulos();
-        
-        Ticket ticket = new Ticket(carrito);
-        ticket.generaTicket();
-        */
         Scanner leer = new Scanner(System.in);
         System.err.println("Bienvenido a \"Germain Shop Online\"");
         

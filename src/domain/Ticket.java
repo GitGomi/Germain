@@ -151,7 +151,7 @@ public class Ticket {
             }
         }
         }catch(NullPointerException e){
-           throw new CarritoException("Codigo de articulo no válido!!!" + e.getMessage());
+           throw new CarritoException("Alguno de los articulos no está disponible!!!");
         }
     }
     

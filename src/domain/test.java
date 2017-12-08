@@ -21,7 +21,11 @@ public class test {
         
         Scanner leer = new Scanner(System.in);
         System.out.println("BIENVENIDO A \"Germain Shop Online\"");
-        System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles :: 2.Captura Articulos a Comprar :: 3.Lista Articulos del Carrito :: 4.Comprar");
+        /**
+         * Las opciones 3 y 4 me faltó tiempo para implementarlas
+         * System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles :: 2.Captura Articulos a Comprar :: 3.Lista Articulos del Carrito :: 4.Comprar");
+         */
+        System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles :: 2.Captura Articulos a Comprar");
         
         String opcion = leer.nextLine();
 
@@ -31,6 +35,7 @@ public class test {
             case "2":
                 capturaArticulos(leer, carrito);
                 break;
+            /*    
             case "3":
                 if(carrito.getArticulos().size() > 0){
                     carrito.listaArticulos();
@@ -48,10 +53,15 @@ public class test {
                     System.err.println("Carrito vacío \nMuchas gracias, esperamos vuelvas pronto");
                 }
                 break;
+            */
+            default:
+                System.out.println("Opción inválida!!!");
+                break;
         }
     }
     
     private static void capturaArticulos(Scanner leer, Carrito carrito) {
+        System.out.println("Después de capturar cada producto presiona enter");
         System.out.println("Cuando termines de comprar escribe la palabra \"listo\" ");
         System.out.println("Ingresa los productos a comprar...");
         

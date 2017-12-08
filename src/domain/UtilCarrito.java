@@ -16,7 +16,7 @@ public class UtilCarrito {
     private static Map<Integer,String> catalogoProductos = new HashMap<>();
     public static Map<Integer,String> catalogoCodigos = new HashMap<>();
     private static Map<Integer,Double> catalogoPrecios = new HashMap<>();
-    private static Map<Integer,Integer> catalogoDescuentos = new HashMap<>();
+    public static Map<Integer,Integer> catalogoDescuentos = new HashMap<>();
     
     static {
         crearCatalogoProductos();
@@ -131,6 +131,12 @@ public class UtilCarrito {
             }
         }
         return descuento;
+    }
+    
+    public static void listarProductos () {
+        for (Map.Entry<Integer, String> entry : catalogoProductos.entrySet()) {
+            System.out.println(entry.getValue());
+        }
     }
     
     public static String completaCadena(String base, int tam) {

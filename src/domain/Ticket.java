@@ -5,8 +5,10 @@
  */
 package domain;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import util.CarritoException;
 
 /**
  *
@@ -78,27 +80,39 @@ public class Ticket {
 
     public void generaTicket() {
         List<Articulo> articulos = this.carrito.getArticulos();
+        Collections.sort(articulos);
+        double sumaPrecio = 0.0;
+        double sumaDescuento = 0.0;
+        
+        try {
         calculaCantidades(articulos);
         
-        carrito.listaArticulos();
+        //carrito.listaArticulos();
         
         String articulosVendidos = "# ARTS. VENDIDOS " + articulos.size();
         System.err.println("Articulo" + "\t" + "Código" + "\t\t" + "P/Unitario" + "\t" + "D/Unitario");
         for (Articulo articulo : articulos) {
             if(articulo != null){
-                System.out.println(UtilCarrito.completaCadena(articulo.getDescripcion(), 11) + "\t" + articulo.getCodigo() + "\t\t" + String.format("$%,.2f %n", articulo.getPrecio()));
-                this.subTotal += articulo.getPrecio();
+                System.out.println(UtilCarrito.completaCadena(articulo.getDescripcion(), 11) + "\t" + articulo.getCodigo() + "\t\t" + String.format("$%,.2f ", articulo.getPrecio()) + "\t" + String.format("$%,.2f ", articulo.getDescuentoUnitario()) + "\t(" + articulo.getDescuento() + "%)");
+                sumaPrecio += articulo.getPrecio();
+                sumaDescuento += articulo.getDescuentoUnitario();
             }
         }
-        System.out.println("" + "\t\t" + "SubTotal " + "\t" + String.format("$%,.2f %n", this.subTotal));
+        this.subTotal = sumaDescuento;
+        
+        System.out.println("\n\t\t\t\t" + "SubTotal " + "\t" + String.format("$%,.2f %n", this.subTotal));
+        System.out.println("\n\t\t\t\t" + "Ahorró " + "\t\t" + String.format("$%,.2f %n", (sumaPrecio-sumaDescuento)));
         calculaTotal();
-        System.out.println("" + "\t\t" + UtilCarrito.completaCadena("IVA(16%) ", 5) + "\t" + String.format("$%,.2f %n", this.iva));
-        System.out.println("" + "\t\t" + UtilCarrito.completaCadena("Total ", 5) + "\t\t" + String.format("$%,.2f %n", this.total));
+        System.out.println("\t\t\t\t" + UtilCarrito.completaCadena("IVA(16%) ", 5) + "\t" + String.format("$%,.2f %n", this.iva));
+        System.out.println("\t\t\t\t" + UtilCarrito.completaCadena("Total ", 5) + "\t\t" + String.format("$%,.2f %n", this.total));
         System.out.println("");
         
-        System.out.println(UtilCarrito.completaCadena("", 10) + articulosVendidos);
+        System.out.println(UtilCarrito.completaCadena("", 22) + articulosVendidos);
         System.out.println("");
-        System.out.println("\t"+ UtilCarrito.completaCadena("***COPIA DE CLIENTE***", 10));
+        System.out.println(UtilCarrito.completaCadena("", 20) + "\"***COPIA DE CLIENTE***\"");
+        }catch(CarritoException ce) {
+            System.err.println(ce.getMessage());
+        }
     }
     
     private double obtenerIva() {
@@ -110,8 +124,9 @@ public class Ticket {
         this.total = this.subTotal + obtenerIva();
     }
     
-    private void calculaCantidades(List<Articulo> articulos){
+    private void calculaCantidades(List<Articulo> articulos)throws CarritoException{
         int cantidad = 0;
+        try {
         for (Map.Entry<Integer, String> entry : UtilCarrito.catalogoCodigos.entrySet()) {
             for (Articulo articulo : articulos) {
                 if(entry.getValue().equals(articulo.getCodigo())){
@@ -121,13 +136,30 @@ public class Ticket {
             actualizaCantidad(entry.getValue(), cantidad, articulos);
             cantidad = 0;
         }
+        }catch(CarritoException ce) {
+            throw new CarritoException(ce.getMessage());
+        }
 
     }
     
-    private void actualizaCantidad(String codigo, int cantidad, List<Articulo> articulos) {
+    private void actualizaCantidad(String codigo, int cantidad, List<Articulo> articulos)throws CarritoException {
+        try{
         for (Articulo articulo : articulos) {
             if(articulo.getCodigo().equals(codigo)){
                 articulo.setCantidad(cantidad);
+                calculaPrecioUnitarioConDescuento(articulo);
+            }
+        }
+        }catch(NullPointerException e){
+           throw new CarritoException("Codigo de articulo no válido!!!" + e.getMessage());
+        }
+    }
+    
+    private void calculaPrecioUnitarioConDescuento(Articulo articulo) {
+        for (Map.Entry<Integer, Integer> entry : UtilCarrito.catalogoDescuentos.entrySet()) {
+            if(entry.getKey().equals(articulo.getIdArticulo())){
+                double descuento = articulo.getPrecio() - (((double)entry.getValue() / 100) * articulo.getPrecio());
+                articulo.setDescuentoUnitario(descuento);
             }
         }
     }

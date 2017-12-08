@@ -20,9 +20,38 @@ public class test {
         Carrito carrito = new Carrito();
         
         Scanner leer = new Scanner(System.in);
-        System.err.println("Bienvenido a \"Germain Shop Online\"");
+        System.out.println("BIENVENIDO A \"Germain Shop Online\"");
+        System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles :: 2.Captura Articulos a Comprar :: 3.Lista Articulos del Carrito :: 4.Comprar");
         
-        System.out.println("----------------------------------");
+        String opcion = leer.nextLine();
+
+        switch(opcion) {
+            case "1":
+                UtilCarrito.listarProductos();
+            case "2":
+                capturaArticulos(leer, carrito);
+                break;
+            case "3":
+                if(carrito.getArticulos().size() > 0){
+                    carrito.listaArticulos();
+                }else {
+                    System.err.println("Carrito vacío \nMuchas gracias, esperamos vuelvas pronto");
+                }
+                
+                break;
+            case "4":
+                if(carrito.getArticulos().size() > 0){
+                    Ticket ticket = new Ticket(carrito);
+                    System.out.println("\nGenerando Ticket # " + ticket.getIdTicket());
+                    ticket.generaTicket();
+                }else {
+                    System.err.println("Carrito vacío \nMuchas gracias, esperamos vuelvas pronto");
+                }
+                break;
+        }
+    }
+    
+    private static void capturaArticulos(Scanner leer, Carrito carrito) {
         System.out.println("Cuando termines de comprar escribe la palabra \"listo\" ");
         System.out.println("Ingresa los productos a comprar...");
         
@@ -38,7 +67,7 @@ public class test {
                 carrito.agregarArticulo(articulo);
             }           
         }
-        //carrito.listaArticulos();
+        
         if(carrito.getArticulos().size() > 0){
             Ticket ticket = new Ticket(carrito);
             System.out.println("\nGenerando Ticket # " + ticket.getIdTicket());
@@ -58,6 +87,6 @@ public class test {
         descuento = UtilCarrito.obtenerDescuento(idProducto);
         //System.out.println("Descuento -> " + descuento);
         
-        articulo = new Articulo(codigo, descripcion, precio, descuento);
+        articulo = new Articulo(idProducto, codigo, descripcion, precio, descuento);
     }
 }

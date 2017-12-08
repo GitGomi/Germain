@@ -9,10 +9,12 @@ package domain;
  *
  * @author 171204 Grupo Salinas
  */
-public class Articulo {
+public class Articulo implements Comparable<Articulo>{
+    private int idArticulo;
     private String codigo;
     private String descripcion;
     private double precio;
+    private double descuentoUnitario;
     private int descuento;
     private int cantidad;
     
@@ -24,11 +26,20 @@ public class Articulo {
         this.descuento = descuento;
     }
     
-    public Articulo(String codigo, String descripcion, double precio, int descuento) {
+    public Articulo(int idArticulo, String codigo, String descripcion, double precio, int descuento) {
+        this.idArticulo = idArticulo;
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.precio = precio;
         this.descuento = descuento;
+    }
+
+    public int getIdArticulo() {
+        return idArticulo;
+    }
+
+    public void setIdArticulo(int idArticulo) {
+        this.idArticulo = idArticulo;
     }
 
     public String getCodigo() {
@@ -59,6 +70,14 @@ public class Articulo {
         }
     }
 
+    public double getDescuentoUnitario() {
+        return descuentoUnitario;
+    }
+
+    public void setDescuentoUnitario(double descuentoUnitario) {
+        this.descuentoUnitario = descuentoUnitario;
+    }
+    
     public int getDescuento() {
         return descuento;
     }
@@ -79,7 +98,12 @@ public class Articulo {
 
     @Override
     public String toString() {
-        return "Articulo{" + "cantidad=" + cantidad + ", codigo=" + codigo + ", descripcion=" + descripcion + ", precio=" + String.format("$%,.2f %n", precio) + ", descuento=" + descuento + '}';
+        return "Articulo{" + "idArticulo=" + idArticulo + ", cantidad=" + cantidad + ", codigo=" + codigo + ", descripcion=" + descripcion + ", precio=" + String.format("$%,.2f %n", precio) + ", descuento=" + descuento + ", descuentoUnitario=" + String.format("$%,.2f %n", descuentoUnitario) + '}';
+    }
+
+    @Override
+    public int compareTo(Articulo t) {
+        return this.descripcion.compareTo(t.descripcion);
     }
 
 }

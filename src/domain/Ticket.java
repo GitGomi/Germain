@@ -90,7 +90,7 @@ public class Ticket {
         //carrito.listaArticulos();
         
         String articulosVendidos = "# ARTS. VENDIDOS " + articulos.size();
-        System.err.println("Articulo" + "\t" + "Código" + "\t\t" + "P/Unitario" + "\t" + "D/Unitario");
+        System.err.println("Articulo" + "\t" + "Codigo" + "\t\t" + "P/Unitario" + "\t" + "D/Unitario");
         for (Articulo articulo : articulos) {
             if(articulo != null){
                 System.out.println(UtilCarrito.completaCadena(articulo.getDescripcion(), 11) + "\t" + articulo.getCodigo() + "\t\t" + String.format("$%,.2f ", articulo.getPrecio()) + "\t" + String.format("$%,.2f ", articulo.getDescuentoUnitario()) + "\t(" + articulo.getDescuento() + "%)");
@@ -101,7 +101,7 @@ public class Ticket {
         this.subTotal = sumaDescuento;
         
         System.out.println("\n\t\t\t\t" + "SubTotal " + "\t" + String.format("$%,.2f %n", this.subTotal));
-        System.out.println("\n\t\t\t\t" + "Ahorró " + "\t\t" + String.format("$%,.2f %n", (sumaPrecio-sumaDescuento)));
+        System.out.println("\n\t\t\t\t" + "Ahorro " + "\t\t" + String.format("$%,.2f %n", (sumaPrecio-sumaDescuento)));
         calculaTotal();
         System.out.println("\t\t\t\t" + UtilCarrito.completaCadena("IVA(16%) ", 5) + "\t" + String.format("$%,.2f %n", this.iva));
         System.out.println("\t\t\t\t" + UtilCarrito.completaCadena("Total ", 5) + "\t\t" + String.format("$%,.2f %n", this.total));

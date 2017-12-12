@@ -22,7 +22,7 @@ public class test {
         Scanner leer = new Scanner(System.in);
         System.out.println("BIENVENIDO A \"Germain Shop Online\"");
         /**
-         * Las opciones 3 y 4 me faltó tiempo para implementarlas
+         * Las opciones 3 y 4 me falto tiempo para implementarlas
          * System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles :: 2.Captura Articulos a Comprar :: 3.Lista Articulos del Carrito :: 4.Comprar");
          */
         System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles :: 2.Captura Articulos a Comprar");

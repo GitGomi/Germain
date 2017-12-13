@@ -92,7 +92,6 @@ public class UtilCarrito {
         int id = 0;
         for (Map.Entry<Integer, String> entry : catalogoProductos.entrySet()) {
             if(entry.getValue().equalsIgnoreCase(producto)){
-                //System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
                 id = entry.getKey();
                 break;
             }
@@ -104,7 +103,6 @@ public class UtilCarrito {
         String codigo = null;
         for (Map.Entry<Integer, String> entry : catalogoCodigos.entrySet()) {
             if(entry.getKey() == idProducto){
-                //System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
                 codigo = entry.getValue();
                 break;
             }
@@ -116,7 +114,6 @@ public class UtilCarrito {
         double precio = 0.0;
         for (Map.Entry<Integer, Double> entry : catalogoPrecios.entrySet()) {
             if(entry.getKey() == idProducto){
-                //System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
                 precio = entry.getValue();
                 break;
             }
@@ -128,7 +125,6 @@ public class UtilCarrito {
         int descuento = 0;
         for (Map.Entry<Integer, Integer> entry : catalogoDescuentos.entrySet()) {
             if(entry.getKey() == idProducto){
-                //System.out.println("clave=" + entry.getKey() + ", valor=" + entry.getValue());
                 descuento = entry.getValue();
                 break;
             }

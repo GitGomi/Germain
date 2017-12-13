@@ -23,10 +23,6 @@ public class test {
     	leer = new Scanner(System.in);
         
     	System.out.println("BIENVENIDO A \"Germain Shop Online\"");
-        /**
-         * Las opciones 3 y 4 me falto tiempo para implementarlas
-         * System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles :: 2.Captura Articulos a Comprar :: 3.Lista Articulos del Carrito :: 4.Comprar");
-         */
         //System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles :: 2.Captura Articulos a Comprar");
         System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles || 2.Captura Articulos a Comprar || 3.Lista Articulos del Carrito || 4.Comprar || 5.Salir");
         
@@ -104,13 +100,9 @@ public class test {
     
     private static void crearArticulo(String descripcion){
         idProducto = UtilCarrito.obtenerIdProducto(descripcion);
-        //System.out.println("Id producto -> " + idProducto);
         codigo = UtilCarrito.obtenerCodigo(idProducto);
-        //System.out.println("Codigo -> " + codigo);
         double precio = UtilCarrito.obtenerPrecio(idProducto);
-        //System.out.println("Precio -> " + precio);
         descuento = UtilCarrito.obtenerDescuento(idProducto);
-        //System.out.println("Descuento -> " + descuento);
         
         articulo = new Articulo(idProducto, codigo, descripcion, precio, descuento);
     }

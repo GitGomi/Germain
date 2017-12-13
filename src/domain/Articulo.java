@@ -98,7 +98,8 @@ public class Articulo implements Comparable<Articulo>{
 
     @Override
     public String toString() {
-        return "Articulo{" + "idArticulo=" + idArticulo + ", cantidad=" + cantidad + ", codigo=" + codigo + ", descripcion=" + descripcion + ", precio=" + String.format("$%,.2f %n", precio) + ", descuento=" + descuento + ", descuentoUnitario=" + String.format("$%,.2f %n", descuentoUnitario) + '}';
+        //return "Articulo{" + "idArticulo=" + idArticulo + ", cantidad=" + cantidad + ", codigo=" + codigo + ", descripcion=" + descripcion + ", precio=" + String.format("$%,.2f %n", precio) + ", descuento=" + descuento + ", descuentoUnitario=" + String.format("$%,.2f %n", descuentoUnitario) + '}';
+    	return UtilCarrito.completaCadena(descripcion, 12) + String.format("$%,.2f\t", precio) + descuento + "%";
     }
 
     @Override

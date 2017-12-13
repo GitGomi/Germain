@@ -18,6 +18,9 @@ public class UtilCarrito {
     private static Map<Integer,Double> catalogoPrecios = new HashMap<>();
     public static Map<Integer,Integer> catalogoDescuentos = new HashMap<>();
     
+    public static final String MSJ_CARRITO_VACIO = "Carrito vacío\n";
+    public static final String MSJ_GRACIAS = "Muchas gracias, esperamos vuelvas pronto\n";
+    
     static {
         crearCatalogoProductos();
         crearCatalogoCodigos();

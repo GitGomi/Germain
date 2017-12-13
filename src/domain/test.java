@@ -14,62 +14,67 @@ import java.util.Scanner;
 public class test {
     private static Articulo articulo = null;
     private static int idProducto = 0, descuento = 0;
-    private static String codigo = null, descripcion = null;
+    private static String codigo = null, descripcion = null, opcion = null;
+    private static Carrito carrito = null;
+    private static Scanner leer = null;
     
     public static void main(String... args) {
-        Carrito carrito = new Carrito();
+    	carrito = new Carrito();
+    	leer = new Scanner(System.in);
         
-        Scanner leer = new Scanner(System.in);
-        System.out.println("BIENVENIDO A \"Germain Shop Online\"");
+    	System.out.println("BIENVENIDO A \"Germain Shop Online\"");
         /**
          * Las opciones 3 y 4 me falto tiempo para implementarlas
          * System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles :: 2.Captura Articulos a Comprar :: 3.Lista Articulos del Carrito :: 4.Comprar");
          */
-        System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles :: 2.Captura Articulos a Comprar");
+        //System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles :: 2.Captura Articulos a Comprar");
+        System.out.println("Opciones disponibles: \n1.Lista Articulos Disponibles || 2.Captura Articulos a Comprar || 3.Lista Articulos del Carrito || 4.Comprar || 5.Salir");
         
-        String opcion = leer.nextLine();
+        opciones();
+        
+    }
+    
+    private static void opciones() {
+    	System.out.println("¿Qué deseas hacer?");
+    	opcion = leer.nextLine();
 
         switch(opcion) {
             case "1":
                 UtilCarrito.listarProductos();
+                opciones();
+                break;
             case "2":
-                capturaArticulos(leer, carrito);
+                capturaArticulos();
                 break;
-            /*    
             case "3":
-                if(carrito.getArticulos().size() > 0){
-                    carrito.listaArticulos();
-                }else {
-                    System.err.println("Carrito vacÃ­o \nMuchas gracias, esperamos vuelvas pronto");
-                }
-                
-                break;
+            	listaArticulos();
+            	opciones();
+            	break;
             case "4":
-                if(carrito.getArticulos().size() > 0){
-                    Ticket ticket = new Ticket(carrito);
-                    System.out.println("\nGenerando Ticket # " + ticket.getIdTicket());
-                    ticket.generaTicket();
-                }else {
-                    System.err.println("Carrito vacÃ­o \nMuchas gracias, esperamos vuelvas pronto");
-                }
+                comprar();
+            	opciones();
                 break;
-            */
+            case "5":
+            	System.err.println(UtilCarrito.MSJ_GRACIAS);
+                break;
             default:
-                System.out.println("OpciÃ³n invÃ¡lida!!!");
+                System.out.println("Opción inválida!!!");
+                opciones();
                 break;
         }
     }
     
-    private static void capturaArticulos(Scanner leer, Carrito carrito) {
-        System.out.println("DespuÃ©s de capturar cada producto presiona enter");
-        System.out.println("Cuando termines de comprar escribe la palabra \"listo\" ");
+    private static void capturaArticulos() {
+        System.out.println("Después de capturar cada producto presiona enter");
+        System.out.println("Cuando termines de comprar escribe la palabra \"finalizar\" ");
         System.out.println("Ingresa los productos a comprar...");
         
         String saltar = null;
         while (true) {
             saltar = leer.nextLine();
             
-            if("LISTO".equalsIgnoreCase(saltar)){
+            if("FINALIZAR".equalsIgnoreCase(saltar)){
+            	opciones();
                 break;
             }else {
                 descripcion = saltar.toUpperCase();
@@ -77,13 +82,23 @@ public class test {
                 carrito.agregarArticulo(articulo);
             }           
         }
-        
-        if(carrito.getArticulos().size() > 0){
+    }
+    
+    private static void listaArticulos() {
+    	if(carrito.getArticulos().size() > 0){
+            carrito.listaArticulos();
+        }else {
+            System.out.println(UtilCarrito.MSJ_CARRITO_VACIO);
+        }
+    }
+    
+    private static void comprar() {
+    	if(carrito.getArticulos().size() > 0){
             Ticket ticket = new Ticket(carrito);
             System.out.println("\nGenerando Ticket # " + ticket.getIdTicket());
             ticket.generaTicket();
         }else {
-            System.err.println("Muchas gracias, esperamos vuelvas pronto");
+            System.out.println(UtilCarrito.MSJ_CARRITO_VACIO);
         }
     }
     

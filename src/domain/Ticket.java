@@ -111,7 +111,7 @@ public class Ticket {
         System.out.println("");
         System.out.println(UtilCarrito.completaCadena("", 20) + "\"***COPIA DE CLIENTE***\"");
         }catch(CarritoException ce) {
-            System.err.println(ce.getMessage());
+            System.out.println(ce.getMessage());
         }
     }
     
@@ -151,7 +151,7 @@ public class Ticket {
             }
         }
         }catch(NullPointerException e){
-           throw new CarritoException("Alguno de los articulos no estÃ¡ disponible!!!");
+           throw new CarritoException("Alguno de los artículos no está disponible!!!");
         }
     }
     

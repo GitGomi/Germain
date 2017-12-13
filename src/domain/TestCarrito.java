@@ -11,7 +11,7 @@ import java.util.Scanner;
  *
  * @author 171204 Grupo Salinas
  */
-public class test {
+public class TestCarrito {
     private static Articulo articulo = null;
     private static int idProducto = 0, descuento = 0;
     private static String codigo = null, descripcion = null, opcion = null;
